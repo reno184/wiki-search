@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../shared/auth.service";
 import {Router} from "@angular/router";
-import {ArticleService} from "../../../shared/article.service";
+import {WikiService} from "../../../shared/wiki.service";
 import {Observable} from "rxjs";
 import * as algoliasearch from "algoliasearch/lite";
 const searchClient = algoliasearch(
@@ -25,30 +25,33 @@ const searchClient = algoliasearch(
                 </a>
             </div>
         </nav>
-        <div class="jumbotron shadow-sm border border-dark bg-white my-3">
-            <h1>Filtres</h1>
+        <div class="shadow-sm border border-dark bg-white my-3">
             <a routerLink="../article-detail">Nouveau</a>
         </div>
-        <ng-container *ngIf="articles$ | async as articles">
-            {{ articles | json}}
-        </ng-container>
         <ais-instantsearch [config]="config">
             <ais-configure [searchParameters]="{ hitsPerPage: 3 }"></ais-configure>
-            <div class="right-panel">
+            <div>
                 <ais-search-box></ais-search-box>
                 <ais-hits>
                     <ng-template let-hits="hits">
-                        <ol class="ais-Hits-list">
-                            <li *ngFor="let hit of hits" >
-                                <div class="hit-name">
+                        <div class="card-group my-3">
+                            <div *ngFor="let hit of hits" class="card mx-1" >
+                                <div class="card-body">
+                                   
+                                        <div class="card-title">
+                                            <ais-highlight attribute="desc" [hit]="hit"></ais-highlight>
+                                        </div>
+                                        <div [innerHTML]="hit.content" class="card-text" ></div>
+                                    <div class="text-right">
+                                    <a routerLink="../article-detail" [queryParams]="{ 'wiki-id' : hit.id }" class="mr-1">Voir</a>
+                                    <a role="button" (click)="onDelete(hit.objectID)">Delete</a>
+                                    </div>
+                                </div>
+                                <!--div class="hit-name">
                                     <ais-highlight attribute="desc" [hit]="hit"></ais-highlight>
-                                </div>
-                                <div class="hit-description">
-                                    <ais-highlight attribute="content" [hit]="hit"></ais-highlight>
-                                </div>
-                                <div [innerHTML]="hit.content" ></div>
-                            </li>
-                        </ol>
+                                </div-->
+                            </div>
+                        </div>
                     </ng-template>
                 </ais-hits>
                 <ais-pagination></ais-pagination>
@@ -65,7 +68,7 @@ export class ArticleListComponent implements OnInit {
         indexName: 'wiki',
         searchClient
     };
-  constructor( private authService: AuthService, private router : Router, private articleService: ArticleService) {
+  constructor( private authService: AuthService, private router : Router, private articleService: WikiService) {
       this.articles$ = this.articleService.getItems();
 
   }
@@ -75,5 +78,9 @@ export class ArticleListComponent implements OnInit {
     onSignOut() {
         this.authService.logoff();
         this.router.navigateByUrl('/')
+    }
+    onDelete(id){
+      console.log('delete', id)
+   this.articleService.delete(id)
     }
 }

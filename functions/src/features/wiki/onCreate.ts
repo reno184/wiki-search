@@ -11,7 +11,7 @@ exports.default = functions
     .region('europe-west1')
     .firestore.document('wiki/{wikiId}')
     .onCreate( (snapshot, context) => {
-        const temp = Object.assign(snapshot.data(), { objectID : snapshot.id})
+        const temp = Object.assign(snapshot.data(), { objectID : snapshot.id, urlArray : [], photoArray : []})
         // @ts-ignore
-        return index.saveObject(temp).then(result=>console.log(result)).catch(err=>console.log(err))
+        return index.saveObject(temp)
     });
