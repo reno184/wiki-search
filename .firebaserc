@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "dev-mamba": {
+      "hosting": {
+        "wiki-search": [
+          "dev-mamba"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "dev-mamba"
+  }
+}
