@@ -47,6 +47,7 @@ export class NewUrlComponent implements OnInit {
             ['bold', 'italic', 'underline'],
             ['blockquote', 'code-block'],
             [{'header': 1}, {'header': 2}],
+            ['link'],
             [{'list': 'ordered'}, {'list': 'bullet'}],
         ]
     };

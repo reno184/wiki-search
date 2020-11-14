@@ -11,10 +11,10 @@
 }
 .rhe a[role=button]{
    cursor :pointer;
-    color: #b3bb4b
+    color: #3968c6
 }
 .rhe a[role=button]:hover{
-    color: #818733;
+    color: #28498b;
     text-decoration : underline;
 }
 .rhe .modal ul li.list-group-item{
@@ -27,16 +27,16 @@
 }
 
 .rhe .ais-Pagination-item--selected .ais-Pagination-link{
-    background: #b3bb4b;
-    border-color: #818733;
+    background: #3968c6;
+    border-color: #28498b;
 }
 
 .rhe .ais-Breadcrumb-link:hover, .ais-Breadcrumb-link:focus, .ais-HierarchicalMenu-link:hover, .ais-HierarchicalMenu-link:focus, .ais-Menu-link:hover, .ais-Menu-link:focus, .ais-Pagination-link:hover, .ais-Pagination-link:focus, .ais-RatingMenu-link:hover, .ais-RatingMenu-link:focus{
-    color: #818733;
+    color: #28498b;
 }
 
 .rhe .ais-Breadcrumb-link, .ais-HierarchicalMenu-link, .ais-Menu-link, .ais-Pagination-link, .ais-RatingMenu-link{
-    color: #818733;
+    color: #28498b;
 }
 
 .rhe .card-text pre{
