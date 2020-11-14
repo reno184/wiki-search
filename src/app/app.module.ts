@@ -7,23 +7,25 @@ import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import { AuthComponent } from './ui/page/auth/auth.component';
 import { ArticleListComponent } from './ui/page/article-list/article-list.component';
-import { TagListComponent } from './ui/modal/tag-list/tag-list.component';
+
 import {RouterModule} from "@angular/router";
 import { ModalComponent } from './ui/modal/modal.component';
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
-import { ArticleDetailComponent } from './ui/page/article-detail/article-detail.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {QuillModule} from "ngx-quill";
 import {NgAisModule} from "angular-instantsearch";
+import { NewItemComponent } from './ui/modal/new-item/new-item.component';
+import { NewUrlComponent } from './ui/modal/new-url/new-url.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     ArticleListComponent,
-    TagListComponent,
+
     ModalComponent,
-    ArticleDetailComponent
+    NewItemComponent,
+    NewUrlComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +39,8 @@ import {NgAisModule} from "angular-instantsearch";
           {
               path: 'page',
               children : [
-                  {path: 'article-list', component: ArticleListComponent},
-                  {path: 'article-detail', component: ArticleDetailComponent}
+                  {path: 'wiki-list', component: ArticleListComponent},
+                  { path: 'new-item', component: NewItemComponent}
                   ],
               canActivate: [AngularFireAuthGuard], data: {authGuardPipe: () => redirectUnauthorizedTo(['auth'])}
           },
@@ -51,7 +53,9 @@ import {NgAisModule} from "angular-instantsearch";
               outlet: 'modal', children : [
                   {
                       path: '', component: ModalComponent, children: [
-                          {path: 'tag-list', component: TagListComponent}]
+                          { path: 'new-url', component: NewUrlComponent},
+
+                      ]
                   }
               ]
           },

@@ -17,7 +17,7 @@ import {AuthService} from "../../../shared/auth.service";
                   <div class="card-body text-center">
                       <img src="../../../../assets/img/android-chrome-192x192.png" alt="logo" style="width:192px">
                       <hr>
-                      <a [routerLink]="['../page/article-list']" >Se connecter</a>
+                      <a [routerLink]="['../page/wiki-list']" >Se connecter</a>
                   </div>
               </ng-container>
 

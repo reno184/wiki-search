@@ -1,33 +1,34 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/firestore";
 import {Observable} from "rxjs";
+import {Params} from "@angular/router";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class WikiService {
 
-  constructor(private afs: AngularFirestore) {
-  }
-    getItem(id :string): Observable<any> {
+    constructor(private afs: AngularFirestore) {
+    }
+
+    getItem(id: string): Observable<any> {
         const ref = this.afs.collection<any>('wiki').doc(id);
         return ref.valueChanges();
     }
+
     getItems(): Observable<any[]> {
         const ref = this.afs.collection<any>('wiki');
         return ref.valueChanges();
     }
-    add(obj : any) {
-        const id = Date.now().toString();
+
+    upsert(params: Params, obj: any) {
+       console.log(params, obj);
+        const id = params['wiki-id'] || Date.now().toString();
         const ref = this.afs.collection<any>('wiki').doc(id);
-        return ref.set(Object.assign(obj, { id  }));
+        return params['wiki-id'] ?  ref.update(obj) : ref.set(obj)
     }
-    update(id : string, obj : any) {
-      console.info('ren',id)
-        const ref = this.afs.collection<any>('wiki').doc(id);
-        return ref.update(obj);
-    }
-    delete(id : string) {
+
+    delete(id: string) {
         const ref = this.afs.collection<any>('wiki').doc(id);
         return ref.delete();
     }
