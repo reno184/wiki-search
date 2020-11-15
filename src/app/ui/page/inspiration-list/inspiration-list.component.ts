@@ -9,37 +9,21 @@ import {FormControl} from "@angular/forms";
 @Component({
     selector: 'app-inspiration-list',
     template: `
+        <div class="mt-4 mb-3">
+            <a [routerLink]="['/', { outlets: { modal: 'modal/modal-inspiration' }}]"
+               queryParamsHandling="preserve"
+               class="btn btn-primary"><i class="far fa-plus-circle mr-1"></i>Nouvelle</a>
+            <select class="custom-select ml-1" [formControl]="filtre" style="width: 300px">
+                <option value="ecran">Ecran</option>
+                <option value="composant">Composant</option>
+                <option value="divers">Divers</option>
+            </select>
+          
+        </div>
         <ng-container *ngIf="$params | async as params">
-            <div class="container">
-
-                <nav class="navbar navbar-expand-lg navbar-light bg-light rounded mt-2">
-                    <div class="navbar-brand">
-                        <img src="../../../../assets/img/favicon-32x32.png" alt="logo" width="32">
-                        Inspiration
-                    </div>
-                    <ul class="navbar-nav mr-auto ">
-                        <li class="nav-item">
-                            <a [routerLink]="['/', { outlets: { modal: 'modal/modal-inspiration' }}]"
-                               queryParamsHandling="preserve"
-                               class="nav-link"><i class="far fa-plus-circle mr-1"></i>Nouvelle</a>
-                        </li>
-                    </ul>
-                    <div class="badge badge-primary p-2 badge-pill mr-1">
-                        <a routerLink="/" class="text-white" title="Menu">
-                            <i class="far fa-home"></i>
-                        </a>
-                    </div>
-                    <div class="badge badge-primary p-2 badge-pill">
-                        <a (click)="onSignOut()" role="button" class="text-white" title="Déconnexion">
-                            <i class="far fa-lock-open"></i>
-                        </a>
-                    </div>
-                </nav>
-                <select class="custom-select mt-3" [formControl]="filtre" style="width: 300px">
-                    <option value="ecran">Ecran</option>
-                    <option value="composant">Composant</option>
-                    <option value="divers">Divers</option>
-                </select>
+      
+                
+              
                 <div class="card-columns mt-3" *ngIf="$items | async as items">
                     <div *ngFor="let item of items" class="card">
                         <img src="{{item.url}}" alt="item.desc" class="card-img-top">
@@ -55,7 +39,7 @@ import {FormControl} from "@angular/forms";
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </ng-container>
     `,
     styles: []

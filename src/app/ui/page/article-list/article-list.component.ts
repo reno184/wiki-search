@@ -13,40 +13,26 @@ const searchClient = algoliasearch(
 
 @Component({
     selector: 'app-article-list',
-    template: ` 
+    template: `
+        <div class="mt-4 mb-3">
+            <a [routerLink]="['/', { outlets: { modal: 'modal/modal-url' }}]"
+               [queryParams]="{ 'modal-type' : 'modal-url', 'item-type' : 'wiki'}"
+               class="btn btn-primary mr-1"><i class="far fa-plus-circle mr-1"></i>Lien</a>
+
+            <a [routerLink]="['/', { outlets: { modal: 'modal/modal-url' }}]"
+               [queryParams]="{ 'modal-type' : 'modal-code', 'item-type' : 'wiki'}"
+               class="btn btn-primary"><i class="far fa-plus-circle mr-1"></i>Code</a>
+        </div>
             <ng-container *ngIf="params$ | async as params">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light rounded my-2">
-                <div class="navbar-brand">
-                    <img src="../../../../assets/img/favicon-32x32.png" alt="logo" width="32">
-                    Wiki...
-                </div>
-                <ul class="navbar-nav mr-auto ">
-                    <li class="nav-item">
-                        <a [routerLink]="['/', { outlets: { modal: 'modal/modal-url' }}]"
-                           [queryParams]="{ 'modal-type' : 'modal-url', 'item-type' : 'wiki'}"
-                           class="nav-link"><i class="far fa-plus-circle mr-1"></i>Lien</a>
-                    </li>
-                    <li class="nav-item">
-                        <a [routerLink]="['/', { outlets: { modal: 'modal/modal-url' }}]"
-                           [queryParams]="{ 'modal-type' : 'modal-code', 'item-type' : 'wiki'}"
-                           class="nav-link"><i class="far fa-plus-circle mr-1"></i>Code</a>
-                    </li>
-                </ul>
-                <div class="badge badge-primary p-2 badge-pill mr-1">
-                    <a routerLink="/"  class="text-white" title="Menu">
-                        <i class="far fa-home"></i>
-                    </a>
-                </div>
-                <div class="badge badge-primary p-2 badge-pill">
-                    <a (click)="onSignOut()" role="button" class="text-white" title="Déconnexion">
-                        <i class="far fa-lock-open"></i>
-                    </a>
-                </div>
-            </nav>
+    
+
+
+
+          
+            
             <ais-instantsearch [config]="config">
                 <ais-configure [searchParameters]="{ hitsPerPage: 3 }"></ais-configure>
-                <div>
+               
                     <ais-search-box></ais-search-box>
                     <ais-hits>
                         <ng-template let-hits="hits">
@@ -77,9 +63,8 @@ const searchClient = algoliasearch(
                         </ng-template>
                     </ais-hits>
                     <ais-pagination></ais-pagination>
-                </div>
             </ais-instantsearch>
-        </div>
+        
             </ng-container> 
     `,
     styles: []

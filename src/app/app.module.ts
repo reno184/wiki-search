@@ -45,34 +45,7 @@ import {AngularFireStorageModule,BUCKET} from "@angular/fire/storage";
       AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFireAuthModule,
       AngularFireStorageModule,
-      RouterModule.forRoot([
-          {
-              path: 'page',
-              children : [
-                  {path: 'simple-list', component: SimpleListComponent},
-                  {path: 'inspiration-list', component: InspirationListComponent},
-                  {path: 'wiki-list', component: ArticleListComponent},
-                  { path: 'new-item', component: NewItemComponent}
-                  ],
-              canActivate: [AngularFireAuthGuard], data: {authGuardPipe: () => redirectUnauthorizedTo(['auth'])}
-          },
-          {
-              path: 'auth',
-              component: AuthComponent,
-          },
-          {
-              path: 'modal',
-              outlet: 'modal', children : [
-                  {
-                      path: '', component: ModalComponent, children: [
-                          { path: 'modal-url', component: NewUrlComponent},
-                          { path: 'modal-inspiration', component: InspirationComponent},
-                      ]
-                  }
-              ]
-          },
-          {path: '', redirectTo: 'auth', pathMatch: 'full'}
-      ])
+      AppRoutingModule
   ],
     providers: [
         { provide: BUCKET, useValue: 'wiki-crm.appspot.com' }

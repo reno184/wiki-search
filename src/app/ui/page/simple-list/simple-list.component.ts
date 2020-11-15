@@ -8,33 +8,14 @@ import {WikiService} from "../../../shared/wiki.service";
 @Component({
     selector: 'app-simple-list',
     template: `
+            <div class="mt-4 mb-3">
+                <a [routerLink]="['/', { outlets: { modal: 'modal/modal-url' }}]" class="btn btn-primary"
+                   [queryParams]="{ 'modal-type' : 'modal-url'}" queryParamsHandling="merge"
+                ><i class="far fa-plus-circle mr-1"></i>Nouveau</a>
+            </div>
+
         <ng-container *ngIf="$params | async as params">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light shadow rounded mt-2">
-                    <div class="navbar-brand">
-                        <img src="../../../../assets/img/favicon-32x32.png" alt="logo" width="32">
-                        {{getTile(params)}}
-                    </div>
-                    <ul class="navbar-nav mr-auto ">
-                        <li class="nav-item">
-                            <a [routerLink]="['/', { outlets: { modal: 'modal/modal-url' }}]"
-                               [queryParams]="{ 'modal-type' : 'modal-url'}" queryParamsHandling="merge"
-                               class="nav-link"><i class="far fa-plus-circle mr-1"></i>Nouveau</a>
-                        </li>
-                    </ul>
-                    <div class="badge badge-primary p-2 badge-pill mr-1">
-                        <a routerLink="/" class="text-white" title="Menu">
-                            <i class="far fa-home"></i>
-                        </a>
-                    </div>
-                    <div class="badge badge-primary p-2 badge-pill">
-                        <a (click)="onSignOut()" role="button" class="text-white" title="Déconnexion">
-                            <i class="far fa-lock-open"></i>
-                        </a>
-                    </div>
-                </nav>
                 <ng-container *ngIf="$items | async as items">
-                   
                     <div class="list-group my-3">
                         <li class="list-group-item d-flex" *ngFor="let item of items">
                             <div class="d-flex flex-column flex-grow-1">
@@ -50,8 +31,6 @@ import {WikiService} from "../../../shared/wiki.service";
                         </li>
                     </div>
                 </ng-container>
-            </div>
-
         </ng-container>
     `,
     styles: []
@@ -66,15 +45,6 @@ export class SimpleListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-    }
-
-    onSignOut() {
-        this.authService.logoff();
-        this.router.navigateByUrl('/')
-    }
-
-    getTile(params: Params) {
-        return params['item-type'] === 'toread' ? 'Liste à lire...' : 'Liste outils...'
     }
 
     onDelete(params: Params, id: string) {
