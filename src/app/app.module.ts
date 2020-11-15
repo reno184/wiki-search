@@ -16,6 +16,10 @@ import {QuillModule} from "ngx-quill";
 import {NgAisModule} from "angular-instantsearch";
 import { NewItemComponent } from './ui/modal/new-item/new-item.component';
 import { NewUrlComponent } from './ui/modal/new-url/new-url.component';
+import { InspirationListComponent } from './ui/page/inspiration-list/inspiration-list.component';
+import { PageComponent } from './ui/page/page/page.component';
+import { SimpleListComponent } from './ui/page/simple-list/simple-list.component';
+import { InspirationComponent } from './ui/modal/inspiration/inspiration.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { NewUrlComponent } from './ui/modal/new-url/new-url.component';
 
     ModalComponent,
     NewItemComponent,
-    NewUrlComponent
+    NewUrlComponent,
+    InspirationListComponent,
+    PageComponent,
+    SimpleListComponent,
+    InspirationComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +47,8 @@ import { NewUrlComponent } from './ui/modal/new-url/new-url.component';
           {
               path: 'page',
               children : [
+                  {path: 'simple-list', component: SimpleListComponent},
+                  {path: 'inspiration-list', component: InspirationListComponent},
                   {path: 'wiki-list', component: ArticleListComponent},
                   { path: 'new-item', component: NewItemComponent}
                   ],
@@ -53,8 +63,8 @@ import { NewUrlComponent } from './ui/modal/new-url/new-url.component';
               outlet: 'modal', children : [
                   {
                       path: '', component: ModalComponent, children: [
-                          { path: 'new-url', component: NewUrlComponent},
-
+                          { path: 'modal-url', component: NewUrlComponent},
+                          { path: 'modal-inspiration', component: InspirationComponent},
                       ]
                   }
               ]

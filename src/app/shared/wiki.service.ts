@@ -11,25 +11,28 @@ export class WikiService {
     constructor(private afs: AngularFirestore) {
     }
 
-    getItem(id: string): Observable<any> {
-        const ref = this.afs.collection<any>('wiki').doc(id);
+    getItem(type :string, id: string): Observable<any> {
+        const ref = this.afs.collection<any>(type).doc(id);
         return ref.valueChanges();
     }
 
-    getItems(): Observable<any[]> {
-        const ref = this.afs.collection<any>('wiki');
+    getItems(type:string): Observable<any[]> {
+        const ref = this.afs.collection<any>(type);
         return ref.valueChanges();
     }
 
-    upsert(params: Params, obj: any) {
-       console.log(params, obj);
-        const id = params['wiki-id'] || Date.now().toString();
-        const ref = this.afs.collection<any>('wiki').doc(id);
-        return params['wiki-id'] ?  ref.update(obj) : ref.set(obj)
+    upsert(type :string, id: string, obj: any) {
+        const ref = this.afs.collection<any>(type);
+        if(id){
+            return   ref.doc(id).update(Object.assign(obj,{id}))
+        }else{
+            const newid =  Date.now().toString();
+            return  ref.doc(newid).set(Object.assign(obj,{id  : newid}))
+        }
     }
 
-    delete(id: string) {
-        const ref = this.afs.collection<any>('wiki').doc(id);
+    delete(type :string, id: string) {
+        const ref = this.afs.collection<any>(type).doc(id);
         return ref.delete();
     }
 }

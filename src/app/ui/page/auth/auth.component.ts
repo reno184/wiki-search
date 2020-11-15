@@ -17,15 +17,19 @@ import {AuthService} from "../../../shared/auth.service";
                   <div class="card-body text-center">
                       <img src="../../../../assets/img/android-chrome-192x192.png" alt="logo" style="width:192px">
                       <hr>
-                      <a [routerLink]="['../page/wiki-list']" >Se connecter</a>
+                      <ul class="list-unstyled">
+                          <li><a [routerLink]="['../page/simple-list']" [queryParams]="{'item-type' :'tool'}" >Outils</a></li>
+                          <li><a [routerLink]="['../page/simple-list']" [queryParams]="{'item-type' :'toread'}" >A lire</a></li>
+                         <li><a [routerLink]="['../page/wiki-list']" [queryParams]="{'item-type' :'wiki'}" >Wiki list</a></li>
+                         <li><a [routerLink]="['../page/inspiration-list']" [queryParams]="{'item-type' :'inspiration'}" >Inspiration list</a></li> 
+                      </ul>
+                    
                   </div>
               </ng-container>
 
               <ng-template #notConnected>
                   <header class="  text-center  my-3">
                       <img src="../../../../assets/img/android-chrome-192x192.png" alt="logo" style="width:192px">
-                      <hr>
-                      Wiki CRM
                   </header>
                   <form [formGroup]="form" (ngSubmit)="onSubmit()"
                         class="card-body d-flex flex-column align-items-center">
