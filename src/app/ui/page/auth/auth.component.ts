@@ -16,12 +16,12 @@ import {AuthService} from "../../../shared/auth.service";
               <ng-container *ngIf="userState$ | async as user; else notConnected">
                   <div class="card-body text-center">
                       <img src="../../../../assets/img/android-chrome-192x192.png" alt="logo" style="width:192px">
-                      <hr>
+                    
                       <ul class="list-unstyled">
-                          <li><a [routerLink]="['../page/simple-list']" [queryParams]="{'item-type' :'tool'}" >Outils</a></li>
+                          <li><a [routerLink]="['../page/inspiration-list']" [queryParams]="{'item-type' :'inspiration'}" >Inspiration list</a></li>
+                          <li><a [routerLink]="['../page/wiki-list']" [queryParams]="{'item-type' :'wiki'}" >Wiki list</a></li>
                           <li><a [routerLink]="['../page/simple-list']" [queryParams]="{'item-type' :'toread'}" >A lire</a></li>
-                         <li><a [routerLink]="['../page/wiki-list']" [queryParams]="{'item-type' :'wiki'}" >Wiki list</a></li>
-                         <li><a [routerLink]="['../page/inspiration-list']" [queryParams]="{'item-type' :'inspiration'}" >Inspiration list</a></li> 
+                          <li><a [routerLink]="['../page/simple-list']" [queryParams]="{'item-type' :'tool'}" >Outils</a></li>
                       </ul>
                     
                   </div>

@@ -53,7 +53,7 @@ export class InspirationComponent implements OnInit {
     constructor(private formBuilder: FormBuilder, private storage: AngularFireStorage, private wikiService: WikiService, private router: Router, private  activatedRoute: ActivatedRoute) {
         this.formGroup = this.formBuilder.group({
             category: ['ecran', Validators.required],
-            desc: ['', Validators.required],
+            desc: ['Inspiration', Validators.required],
             url: ['', Validators.required]
         })
 

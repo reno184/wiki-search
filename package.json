@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "build": "ng build --prod",
+    "deploy": "firebase  deploy --only hosting",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
