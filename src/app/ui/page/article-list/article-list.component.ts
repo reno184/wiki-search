@@ -61,7 +61,7 @@ const searchClient = algoliasearch(
                                         <div [innerHTML]="hit.content" class="card-text"></div>
                                         <footer class="my-3 text-right bg-light p-1 rounded">
                                             <a *ngIf="hit.content !=''" routerLink="../new-item"
-                                               [queryParams]="{ 'item-id' : hit.objectID, 'item-type' : 'type-wiki' }"
+                                               [queryParams]="{ 'item-id' : hit.objectID }" queryParamsHandling="preserve"
                                                class="mr-1">Détail |</a>
                                             <a [routerLink]="['/', { outlets: { modal: 'modal/modal-url'}}]" queryParamsHandling="merge"
                                                [queryParams]="{ 'item-id' : hit.objectID, 'modal-type' :  (hit.url ? 'modal-url' : 'modal-code') }"

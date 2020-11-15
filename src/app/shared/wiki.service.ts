@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/firestore";
 import {Observable} from "rxjs";
 import {Params} from "@angular/router";
+import {AngularFireStorage} from "@angular/fire/storage";
 
 @Injectable({
     providedIn: 'root'
 })
 export class WikiService {
 
-    constructor(private afs: AngularFirestore) {
+    constructor(private afs: AngularFirestore, private af: AngularFireStorage) {
     }
 
     getItem(type :string, id: string): Observable<any> {
@@ -35,4 +36,6 @@ export class WikiService {
         const ref = this.afs.collection<any>(type).doc(id);
         return ref.delete();
     }
+
+
 }

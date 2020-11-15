@@ -28,7 +28,7 @@ export class NewItemComponent implements OnInit {
     item$:Observable<any>;
 
   constructor(private wikiService : WikiService,private router: Router, private  activatedRoute : ActivatedRoute) {
-     this.item$ =  this.activatedRoute.queryParams.pipe(mergeMap(params => this.wikiService.getItem(params['wiki-id'])));
+     this.item$ =  this.activatedRoute.queryParams.pipe(mergeMap(params => this.wikiService.getItem(params['item-type'],params['item-id'])));
   }
 
   ngOnInit(): void {

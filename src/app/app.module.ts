@@ -20,6 +20,7 @@ import { InspirationListComponent } from './ui/page/inspiration-list/inspiration
 import { PageComponent } from './ui/page/page/page.component';
 import { SimpleListComponent } from './ui/page/simple-list/simple-list.component';
 import { InspirationComponent } from './ui/modal/inspiration/inspiration.component';
+import {AngularFireStorageModule,BUCKET} from "@angular/fire/storage";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { InspirationComponent } from './ui/modal/inspiration/inspiration.compone
         AppRoutingModule,
       AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFireAuthModule,
+      AngularFireStorageModule,
       RouterModule.forRoot([
           {
               path: 'page',
@@ -72,7 +74,9 @@ import { InspirationComponent } from './ui/modal/inspiration/inspiration.compone
           {path: '', redirectTo: 'auth', pathMatch: 'full'}
       ])
   ],
-  providers: [],
+    providers: [
+        { provide: BUCKET, useValue: 'wiki-crm.appspot.com' }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

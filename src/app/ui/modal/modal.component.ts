@@ -17,7 +17,7 @@ import { Component, OnInit } from '@angular/core';
       <div class="modal" style="position: fixed;top:0;z-index: 2;  height: 100vh;  width: 100vw;  background: rgba(53, 53, 0, .3);  display: flex;  align-items: center;  justify-content: center"
       >
           <div class="bg-white pt-4 pb-2 shadow rhe-modal"
-               style="border-radius: 5px;position: relative;margin-top: -50px;">
+               style="border-radius: 5px;position: relative;margin-top: -10%;">
       <router-outlet></router-outlet>
           </div>
       </div>
