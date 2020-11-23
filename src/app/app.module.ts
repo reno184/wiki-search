@@ -21,6 +21,7 @@ import { PageComponent } from './ui/page/page/page.component';
 import { SimpleListComponent } from './ui/page/simple-list/simple-list.component';
 import { InspirationComponent } from './ui/modal/inspiration/inspiration.component';
 import {AngularFireStorageModule,BUCKET} from "@angular/fire/storage";
+import { WikiDetailComponent } from './ui/page/article-list/wiki-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {AngularFireStorageModule,BUCKET} from "@angular/fire/storage";
     InspirationListComponent,
     PageComponent,
     SimpleListComponent,
-    InspirationComponent
+    InspirationComponent,
+    WikiDetailComponent
   ],
   imports: [
     BrowserModule,

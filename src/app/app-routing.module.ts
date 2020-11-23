@@ -10,6 +10,7 @@ import {ModalComponent} from "./ui/modal/modal.component";
 import {NewUrlComponent} from "./ui/modal/new-url/new-url.component";
 import {InspirationComponent} from "./ui/modal/inspiration/inspiration.component";
 import {PageComponent} from "./ui/page/page/page.component";
+import {WikiDetailComponent} from "./ui/page/article-list/wiki-detail.component";
 
 
 const routes: Routes = [];
@@ -23,6 +24,7 @@ const routes: Routes = [];
               {path: 'simple-list', component: SimpleListComponent},
               {path: 'inspiration-list', component: InspirationListComponent},
               {path: 'wiki-list', component: ArticleListComponent},
+              {path: 'wiki-detail', component: WikiDetailComponent},
               { path: 'new-item', component: NewItemComponent}
           ],
           canActivate: [AngularFireAuthGuard], data: {authGuardPipe: () => redirectUnauthorizedTo(['auth'])}
