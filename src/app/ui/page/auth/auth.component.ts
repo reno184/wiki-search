@@ -18,10 +18,8 @@ import {AuthService} from "../../../shared/auth.service";
                       <img src="../../../../assets/img/android-chrome-192x192.png" alt="logo" style="width:192px">
                     
                       <ul class="list-unstyled">
-                          <li><a [routerLink]="['../page/inspiration-list']" [queryParams]="{'item-type' :'inspiration'}" >Inspiration list</a></li>
-                          <li><a [routerLink]="['../page/wiki-list']" [queryParams]="{'item-type' :'wiki'}" >Wiki list</a></li>
-                          <li><a [routerLink]="['../page/simple-list']" [queryParams]="{'item-type' :'toread'}" >A lire</a></li>
-                          <li><a [routerLink]="['../page/simple-list']" [queryParams]="{'item-type' :'tool'}" >Outils</a></li>
+                          <li><a [routerLink]="['../page/link-list']" [queryParams]="{'item-type' :'link'}" class="text-warning" >Mes liens</a></li>
+                          <li><a [routerLink]="['../page/wiki-list']" [queryParams]="{'item-type' :'wiki'}" class="text-success" >Mes wikis</a></li>
                       </ul>
                     
                   </div>
@@ -31,8 +29,10 @@ import {AuthService} from "../../../shared/auth.service";
                   <header class="  text-center  my-3">
                       <img src="../../../../assets/img/android-chrome-192x192.png" alt="logo" style="width:192px">
                   </header>
+            
                   <form [formGroup]="form" (ngSubmit)="onSubmit()"
                         class="card-body d-flex flex-column align-items-center">
+      
                       <label for="iEmail" style="margin-bottom: 0"></label>
                       <input id="iEmail"
                              formControlName="email"
@@ -48,8 +48,10 @@ import {AuthService} from "../../../shared/auth.service";
                              style="border-top: none; border-top-left-radius: 0;border-top-right-radius: 0;"
                              formControlName="password" required="required"
                       >
-                      <button type="submit" [disabled]="form.invalid"
-                              class="mt-3 btn btn-primary btn-sm btn-block">Valider
+                      <button type="submit" [disabled]="form.invalid || isSubmit"
+                              class="mt-3 btn btn-primary btn-sm btn-block">
+                          <i *ngIf="isSubmit" class="far fa-spin fa-spinner"></i>
+                          Valider
                       </button>
                       <div class="text-left text-danger"
                            *ngIf="form.get('email').invalid && form.get('email').touched">
@@ -71,7 +73,7 @@ import {AuthService} from "../../../shared/auth.service";
   ]
 })
 export class AuthComponent implements OnInit {
-
+    isSubmit =false;
     userState$: Observable<any>;
     form: FormGroup;
 
@@ -92,7 +94,8 @@ export class AuthComponent implements OnInit {
     }
 
     onSubmit() {
-        this.authService.loginEmailPassword(this.form.get('email').value, this.form.get('password').value).catch(err => alert(err.message));
+        this.isSubmit =true
+        this.authService.loginEmailPassword(this.form.get('email').value, this.form.get('password').value).finally(()=> this.isSubmit = false).catch(err => alert(err.message));
     }
 
 }

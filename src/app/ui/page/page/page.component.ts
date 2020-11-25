@@ -46,9 +46,7 @@ export class PageComponent implements OnInit {
   }
     getTile(params: Params) {
         const titles = {
-            "toread" : "Liste à lire...",
-            "tool" :  "Liste outils...",
-            "inspiration" : "Liste d'inspiration",
+            "link" : "Liens utiles",
             "wiki": "Liste des wikis",
         }
         return titles[params['item-type']];

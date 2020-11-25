@@ -6,36 +6,30 @@ import { AppComponent } from './app.component';
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import { AuthComponent } from './ui/page/auth/auth.component';
-import { ArticleListComponent } from './ui/page/article-list/article-list.component';
-
+import { WikiListComponent } from './ui/page/wiki/wiki-list.component';
 import {RouterModule} from "@angular/router";
 import { ModalComponent } from './ui/modal/modal.component';
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
 import {ReactiveFormsModule} from "@angular/forms";
 import {QuillModule} from "ngx-quill";
 import {NgAisModule} from "angular-instantsearch";
-import { NewItemComponent } from './ui/modal/new-item/new-item.component';
-import { NewUrlComponent } from './ui/modal/new-url/new-url.component';
-import { InspirationListComponent } from './ui/page/inspiration-list/inspiration-list.component';
+import { WikiComponent } from './ui/modal/wiki/wiki.component';
+import { LinkListComponent } from './ui/page/link/link-list.component';
 import { PageComponent } from './ui/page/page/page.component';
-import { SimpleListComponent } from './ui/page/simple-list/simple-list.component';
-import { InspirationComponent } from './ui/modal/inspiration/inspiration.component';
+import { LinkComponent } from './ui/modal/link/link.component';
 import {AngularFireStorageModule,BUCKET} from "@angular/fire/storage";
-import { WikiDetailComponent } from './ui/page/article-list/wiki-detail.component';
+import { WikiDetailComponent } from './ui/page/wiki/wiki-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    ArticleListComponent,
-
+    WikiListComponent,
     ModalComponent,
-    NewItemComponent,
-    NewUrlComponent,
-    InspirationListComponent,
+    WikiComponent,
+    LinkListComponent,
     PageComponent,
-    SimpleListComponent,
-    InspirationComponent,
+    LinkComponent,
     WikiDetailComponent
   ],
   imports: [

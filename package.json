@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "node10" : "nvm use 12.18.3",
+    "node8" : "nvm use 8.15.0",
     "start": "ng serve",
     "build": "ng build --prod",
     "deploy": "firebase  deploy --only hosting",

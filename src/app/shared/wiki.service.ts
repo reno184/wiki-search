@@ -18,7 +18,7 @@ export class WikiService {
     }
 
     getItems(type:string): Observable<any[]> {
-        const ref = this.afs.collection<any>(type);
+        const ref = this.afs.collection<any>(type, ref => ref.limit(400));
         return ref.valueChanges();
     }
 

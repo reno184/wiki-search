@@ -35,7 +35,7 @@ import {filter, mergeMap} from "rxjs/operators";
     `,
     styles: []
 })
-export class NewUrlComponent implements OnInit {
+export class WikiComponent implements OnInit {
     formGroup: FormGroup;
     params$: Observable<Params>;
 
@@ -77,7 +77,8 @@ export class NewUrlComponent implements OnInit {
         this.wikiService.upsert(params['item-type'], params['item-id'], {
             desc: this.formGroup.get('desc').value,
             url: this.formGroup.get('url').value || '',
-            content: this.formGroup.get('content').value || ''
+            content: this.formGroup.get('content').value || '',
+            category : params['item-type'] === 'inspiration' ? 'link' : ''
         }).then(()=> {
             this.router.navigate(['/', {outlets: {modal: null}}], { queryParamsHandling : 'merge', queryParams : { 'modal-type' : null, 'item-id' : null}})
         })

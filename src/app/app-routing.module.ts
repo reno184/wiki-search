@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SimpleListComponent} from "./ui/page/simple-list/simple-list.component";
-import {InspirationListComponent} from "./ui/page/inspiration-list/inspiration-list.component";
-import {ArticleListComponent} from "./ui/page/article-list/article-list.component";
-import {NewItemComponent} from "./ui/modal/new-item/new-item.component";
+import {LinkListComponent} from "./ui/page/link/link-list.component";
+import {WikiListComponent} from "./ui/page/wiki/wiki-list.component";
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
 import {AuthComponent} from "./ui/page/auth/auth.component";
 import {ModalComponent} from "./ui/modal/modal.component";
-import {NewUrlComponent} from "./ui/modal/new-url/new-url.component";
-import {InspirationComponent} from "./ui/modal/inspiration/inspiration.component";
+import {WikiComponent} from "./ui/modal/wiki/wiki.component";
+import {LinkComponent} from "./ui/modal/link/link.component";
 import {PageComponent} from "./ui/page/page/page.component";
-import {WikiDetailComponent} from "./ui/page/article-list/wiki-detail.component";
+import {WikiDetailComponent} from "./ui/page/wiki/wiki-detail.component";
 
 
 const routes: Routes = [];
@@ -21,11 +19,9 @@ const routes: Routes = [];
           path: 'page',
           component : PageComponent,
           children : [
-              {path: 'simple-list', component: SimpleListComponent},
-              {path: 'inspiration-list', component: InspirationListComponent},
-              {path: 'wiki-list', component: ArticleListComponent},
-              {path: 'wiki-detail', component: WikiDetailComponent},
-              { path: 'new-item', component: NewItemComponent}
+              {path: 'link-list', component: LinkListComponent},
+              {path: 'wiki-list', component: WikiListComponent},
+              {path: 'wiki-detail', component: WikiDetailComponent}
           ],
           canActivate: [AngularFireAuthGuard], data: {authGuardPipe: () => redirectUnauthorizedTo(['auth'])}
       },
@@ -38,8 +34,8 @@ const routes: Routes = [];
           outlet: 'modal', children : [
               {
                   path: '', component: ModalComponent, children: [
-                      { path: 'modal-url', component: NewUrlComponent},
-                      { path: 'modal-inspiration', component: InspirationComponent},
+                      { path: 'modal-wiki', component: WikiComponent},
+                      { path: 'modal-link', component: LinkComponent},
                   ]
               }
           ]
