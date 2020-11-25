@@ -74,13 +74,15 @@ export class WikiComponent implements OnInit {
     }
 
     onSave(params: Params) {
-        this.wikiService.upsert(params['item-type'], params['item-id'], {
+        this.wikiService.upsert(params['item-type'], {
             desc: this.formGroup.get('desc').value,
             url: this.formGroup.get('url').value || '',
-            content: this.formGroup.get('content').value || '',
-            category : params['item-type'] === 'inspiration' ? 'link' : ''
-        }).then(()=> {
-            this.router.navigate(['/', {outlets: {modal: null}}], { queryParamsHandling : 'merge', queryParams : { 'modal-type' : null, 'item-id' : null}})
+            content: this.formGroup.get('content').value || ''
+        }, params['item-id']).then(() => {
+            this.router.navigate(['/', {outlets: {modal: null}}], {
+                queryParamsHandling: 'merge',
+                queryParams: {'modal-type': null, 'item-id': null}
+            })
         })
     }
 }

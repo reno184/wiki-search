@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../shared/auth.service";
@@ -16,12 +16,18 @@ import {AuthService} from "../../../shared/auth.service";
               <ng-container *ngIf="userState$ | async as user; else notConnected">
                   <div class="card-body text-center">
                       <img src="../../../../assets/img/android-chrome-192x192.png" alt="logo" style="width:192px">
-                    
+
                       <ul class="list-unstyled">
-                          <li><a [routerLink]="['../page/link-list']" [queryParams]="{'item-type' :'link'}" class="text-warning" >Mes liens</a></li>
-                          <li><a [routerLink]="['../page/wiki-list']" [queryParams]="{'item-type' :'wiki'}" class="text-success" >Mes wikis</a></li>
+                          <li><a [routerLink]="['../page/link-list']"
+                                 [queryParams]="{'item-type' :'link', 'link-domaine' : 'pro'}" class="text-danger">Mes
+                              liens pro</a></li>
+                          <li><a [routerLink]="['../page/link-list']"
+                                 [queryParams]="{'item-type' :'link', 'link-domaine' : 'perso'}" class="text-warning">Mes
+                              liens perso</a></li>
+                          <li><a [routerLink]="['../page/wiki-list']" [queryParams]="{'item-type' :'wiki'}"
+                                 class="text-success">Mes wikis</a></li>
                       </ul>
-                    
+
                   </div>
               </ng-container>
 
@@ -29,7 +35,7 @@ import {AuthService} from "../../../shared/auth.service";
                   <header class="  text-center  my-3">
                       <img src="../../../../assets/img/android-chrome-192x192.png" alt="logo" style="width:192px">
                   </header>
-            
+
                   <form [formGroup]="form" (ngSubmit)="onSubmit()"
                         class="card-body d-flex flex-column align-items-center">
       

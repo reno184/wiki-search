@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/firestore";
 import {Observable} from "rxjs";
-import {Params} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/storage";
 
 @Injectable({
@@ -22,13 +21,14 @@ export class WikiService {
         return ref.valueChanges();
     }
 
-    upsert(type :string, id: string, obj: any) {
+    upsert(type: string, obj: any, id: string) {
         const ref = this.afs.collection<any>(type);
-        if(id){
-            return   ref.doc(id).update(Object.assign(obj,{id}))
-        }else{
-            const newid =  Date.now().toString();
-            return  ref.doc(newid).set(Object.assign(obj,{id  : newid}))
+        if (!!id) {
+
+            return ref.doc(id).update(Object.assign(obj, {id}))
+        } else {
+            const newid = Date.now().toString();
+            return ref.doc(newid).set(Object.assign(obj, {id: newid}))
         }
     }
 

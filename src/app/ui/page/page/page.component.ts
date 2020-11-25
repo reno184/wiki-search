@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../../shared/auth.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Observable} from "rxjs";
@@ -49,7 +49,7 @@ export class PageComponent implements OnInit {
             "link" : "Liens utiles",
             "wiki": "Liste des wikis",
         }
-        return titles[params['item-type']];
+        return titles[params['item-type']] + (!!params['link-domaine'] ? (' (' + params['link-domaine'] + ')') : '');
     }
     onSignOut() {
         this.authService.logoff();
