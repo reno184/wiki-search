@@ -4,7 +4,6 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {WikiService} from "../../../shared/wiki.service";
 import {Observable} from "rxjs";
 import * as algoliasearch from "algoliasearch/lite";
-import {filter, map, mergeMap} from "rxjs/operators";
 
 const searchClient = algoliasearch(
     'TJ513YQXZZ',
@@ -15,13 +14,10 @@ const searchClient = algoliasearch(
     selector: 'app-article-list',
     template: `
         <div class="mt-4 mb-3">
-            <a [routerLink]="['/', { outlets: { modal: 'modal/modal-url' }}]"
-               [queryParams]="{ 'modal-type' : 'modal-url', 'item-type' : 'wiki'}"
-               class="btn btn-primary mr-1"><i class="far fa-plus-circle mr-1"></i>Lien</a>
+            <a [routerLink]="['/', { outlets: { modal: 'modal/modal-wiki' }}]"
+               queryParamsHandling="preserve"
+               class="btn btn-primary mr-1"><i class="far fa-plus-circle mr-1"></i>Nouveau</a>
 
-            <a [routerLink]="['/', { outlets: { modal: 'modal/modal-url' }}]"
-               [queryParams]="{ 'modal-type' : 'modal-code', 'item-type' : 'wiki'}"
-               class="btn btn-primary"><i class="far fa-plus-circle mr-1"></i>Code</a>
         </div>
         <ng-container *ngIf="params$ | async as params">
             <ais-instantsearch [config]="config">
@@ -36,17 +32,18 @@ const searchClient = algoliasearch(
                                     <div class="card-title">
                                         <ais-highlight attribute="desc" [hit]="hit"></ais-highlight>
                                     </div>
-                                   
+
                                     <div [innerHTML]="hit.content" class="card-text"></div>
                                     <footer class="my-3 text-right bg-light p-1 rounded">
                                         <a *ngIf="hit.content !==''" routerLink="../wiki-detail"
                                            [queryParams]="{ 'item-id' : hit.objectID }" queryParamsHandling="merge"
                                            class="mr-1">Détail |</a>
-                                        <a *ngIf="hit.content ===''" href="{{hit.url}}" class="mr-1" target="_blank" title="{{hit.desc}}">Détail |</a>
-                                        
-                                        <a [routerLink]="['/', { outlets: { modal: 'modal/modal-url'}}]"
+                                        <a *ngIf="hit.url !=='' " href="{{hit.url}}" class="mr-1" target="_blank"
+                                           title="{{hit.url}}">Lien |</a>
+
+                                        <a [routerLink]="['/', { outlets: { modal: 'modal/modal-wiki'}}]"
                                            queryParamsHandling="merge"
-                                           [queryParams]="{ 'item-id' : hit.objectID, 'modal-type' :  (hit.url ? 'modal-url' : 'modal-code') }"
+                                           [queryParams]="{ 'item-id' : hit.objectID }"
                                            class="mr-1">Modifier |</a>
                                         <a role="button" (click)="onDelete(params, hit.objectID)">Delete</a>
                                     </footer>

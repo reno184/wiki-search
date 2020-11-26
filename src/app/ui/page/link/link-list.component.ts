@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../../shared/auth.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {combineLatest, Observable} from "rxjs";
-import {map, startWith} from "rxjs/operators";
+import {map, shareReplay, startWith, tap} from "rxjs/operators";
 import {WikiService} from "../../../shared/wiki.service";
 import {FormControl} from "@angular/forms";
 
@@ -12,7 +12,7 @@ import {FormControl} from "@angular/forms";
         <div class="input-group mt-4">
             <div class="input-group-prepend">
                 <a [routerLink]="['/', { outlets: { modal: 'modal/modal-link' }}]"
-                   class="btn btn-primary"><i class="far fa-plus-circle mr-1"></i>Nouveau</a>
+                   class="btn btn-primary" queryParamsHandling="preserve"><i class="far fa-plus-circle mr-1"></i>Nouveau</a>
             </div>
             <select class="custom-select" [formControl]="filtreFav">
                 <option value="favoris">Favoris</option>
@@ -61,7 +61,7 @@ export class LinkListComponent implements OnInit {
     constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private wikiService: WikiService) {
         const domaine$ = this.activatedRoute.queryParams.pipe(map(params => params['link-domaine']))
 // item.domaine.toLowerCase().indexOf(domaine.toLowerCase()) !== -1
-        const $temp = this.wikiService.getItems('link');
+        const $temp = this.wikiService.getItems('link').pipe(shareReplay(1), tap(x => console.log(x)));
         const filtreFav$ = this.filtreFav.valueChanges.pipe(startWith('favoris'));
         const filtreText$ = this.filtreText.valueChanges.pipe(startWith(''));
         this.$items = combineLatest(domaine$, $temp, filtreFav$, filtreText$).pipe(map(([domaine, items, filtrefav, filtreText]) => {

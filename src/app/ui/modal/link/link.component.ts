@@ -82,7 +82,7 @@ export class LinkComponent implements OnInit {
             imgurl: [''],
             imgpath: [''],
             extlink: [''],
-            favoris: [true]
+            favoris: [false]
         })
 
         this.params$ = this.activatedRoute.queryParams;

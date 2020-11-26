@@ -17,7 +17,7 @@ import {AuthService} from "../../../shared/auth.service";
                   <div class="card-body text-center">
                       <img src="../../../../assets/img/android-chrome-192x192.png" alt="logo" style="width:192px">
 
-                      <ul class="list-unstyled">
+                      <ul class="list-unstyled mt-2">
                           <li><a [routerLink]="['../page/link-list']"
                                  [queryParams]="{'item-type' :'link', 'link-domaine' : 'pro'}" class="text-danger">Mes
                               liens pro</a></li>

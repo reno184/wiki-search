@@ -16,15 +16,15 @@ import {filter, mergeMap} from "rxjs/operators";
                     <textarea class="form-control" formControlName="desc" rows="2"
                               placeholder="Nouvelle description"></textarea>
                 </div>
-                <div *ngIf="params['modal-type']=== 'modal-url'" class="form-group">
+                <div class="form-group">
                     <input type="url" class="form-control" formControlName="url" placeholder="Nouvelle url">
                 </div>
-                <div class="form-group" *ngIf="params['modal-type']=== 'modal-code'">
+                <div class="form-group">
                     <quill-editor [modules]="editorConfig" formControlName="content"></quill-editor>
                 </div>
                 <footer class="d-flex justify-content-around">
-
-                    <a [routerLink]="['/', {outlets: {modal: null}}]" queryParamsHandling="merge" [queryParams]="{ 'modal-type' : null, 'item-id' : null}" class="btn btn-secondary">Retour</a>
+                    <a [routerLink]="['/', {outlets: {modal: null}}]" queryParamsHandling="merge"
+                       [queryParams]="{ 'item-id' : null}" class="btn btn-secondary">Retour</a>
                     <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid"
                             [innerText]="params['item-id'] ? 'Modifier' : 'Ajouter'">
                     </button>
@@ -61,7 +61,7 @@ export class WikiComponent implements OnInit {
 
         this.params$.pipe(
             filter(params => !!params['item-id']),
-            mergeMap(params => this.wikiService.getItem(params['item-type'], params['item-id'] ))).subscribe(item => {
+            mergeMap(params => this.wikiService.getItem('wiki', params['item-id']))).subscribe(item => {
             this.formGroup.patchValue({
                 desc: item.desc,
                 url: item.url,
@@ -74,14 +74,14 @@ export class WikiComponent implements OnInit {
     }
 
     onSave(params: Params) {
-        this.wikiService.upsert(params['item-type'], {
+        this.wikiService.upsert('wiki', {
             desc: this.formGroup.get('desc').value,
             url: this.formGroup.get('url').value || '',
             content: this.formGroup.get('content').value || ''
         }, params['item-id']).then(() => {
             this.router.navigate(['/', {outlets: {modal: null}}], {
                 queryParamsHandling: 'merge',
-                queryParams: {'modal-type': null, 'item-id': null}
+                queryParams: {'item-id': null}
             })
         })
     }
