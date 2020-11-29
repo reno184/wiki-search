@@ -35,7 +35,9 @@ import {FormControl} from "@angular/forms";
                     <img src="{{item.imgurl}}" alt="{{item.desc}}" class="card-img-top">
                 </a>
                 <div class="card-body">
-                    <i *ngIf="!!item.favoris" class="far fa-star mr-1"></i>{{item.desc}}
+                    <i *ngIf="!!item.favoris" class="far fa-star mr-1"></i>
+                    <div>{{item.desc}}</div>
+                    <div class="ellipsis text-primary"><small><i>{{item.extlink}}</i></small></div>
                     <br><small class="badge badge-danger mr-1">{{item.domaine}}</small> <small
                         class="badge badge-primary">{{item.category}}</small>
                 </div>
